@@ -18,7 +18,7 @@ def loginpage(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('blog_list')  # Redirect to blog list after successful login
+            return redirect('blog_list')
         else:
             return render(request, 'BlogApp/login.html', {'error': 'Invalid username or password'})
     return render(request, "BlogApp/login.html")
@@ -54,27 +54,26 @@ def register(request):
             return redirect('../')
     return render(request, "BlogApp/register.html")
 
-@login_required(login_url='../login/')
+@login_required(login_url='../')
 def home(request):
     return render(request, 'BlogApp/user/home.html')
 
-@login_required(login_url='../login/')
+@login_required(login_url='../')
 def userbase(request):
     return render(request, "BlogApp/user/userbase.html")
 
 
-@login_required(login_url='../login')  
+@login_required(login_url='')  
 def blog_list(request):
     blogs = Blog.objects.all().order_by('-created_at') 
     return render(request, 'BlogApp/user/blog_list.html', {'blogs': blogs})
 
-# Read a single blog
 def blog_detail(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
     return render(request, 'BlogApp/user/blog_detail.html', {'blog': blog})
 
-# Create a new blog
-@login_required
+
+@login_required(login_url='../')
 def blog_create(request):
     if request.method == 'POST':
         form = BlogForm(request.POST)
@@ -87,8 +86,7 @@ def blog_create(request):
         form = BlogForm()
     return render(request, 'BlogApp/user/blog_form.html', {'form': form})
 
-# Edit an existing blog
-@login_required
+@login_required(login_url='../')
 def blog_edit(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
     if request.user != blog.author:
@@ -105,8 +103,8 @@ def blog_edit(request, pk):
         form = BlogForm(instance=blog)
     return render(request, 'BlogApp/user/blog_form.html', {'form': form})
 
-# Delete a blog
-@login_required
+
+@login_required(login_url='../')
 def blog_delete(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
     if request.user != blog.author:

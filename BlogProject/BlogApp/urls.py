@@ -3,17 +3,12 @@ from django.urls import path
 
 urlpatterns = [
     path('', views.loginpage, name='login'),  # Login page
-    path('login/', views.loginpage, name='login'),  # Login page
     path('logout/', views.logout_page, name='logout'),  # Logout page
     path('home/', views.home, name='home'),  # Home page
     path('userbase/', views.userbase, name='userbase'),  # Userbase page
     path('blog/', views.blog_cards, name='blog_cards'),
     path('register/', views.register, name ='register'),  # Registration page
    
-
-
-
-
 
     # blog urls
 
