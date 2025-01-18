@@ -27,9 +27,9 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
                     <!-- Brand -->
-                    <a class="navbar-brand" href="{% url 'userbase' %}">
+                    <a class="navbar-brand" href="{% url 'home' %}">
                         <h2 style="font-weight: 800;">
-                            <span style="color: blue;">Blog</span>Post
+                            <span style="color: blue;">Blog</span>Post Home
                         </h2>
                     </a>
 
@@ -42,12 +42,11 @@
                     <!-- Navbar Links -->
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                         <ul class="navbar-nav b-2 mb-lg-0">
-
-                            <li class="nav-item me-4">
-                                <a class="nav-link" href="{% url 'blog_create' %}">NewBlogs</a>
+                          <li class="nav-item me-4">
+                                <a class="nav-link" href="{% url 'blog_create' %}">+ New</a>
                             </li>
                             <li class="nav-item me-4">
-                                <a class="nav-link" href="#">About</a>
+                                <a class="nav-link" href="{% url 'blog_list' %}">Feed</a>
                             </li>
                             <p class="mb-0 ms-3"><a href="../" class="btn btn-primary">Logout</a></p>
                         </ul>
@@ -57,21 +56,9 @@
         </div>
     </div>
     <div class="container"
-        style="display: flex; justify-content: center;  align-items:center;height: 100vh;z-index: -1;">
-        <h1 style="
-        background: linear-gradient(90deg, #1e3c72, #2a5298);
-        color: white;
-        border: 3px solid #1e3c72;
-        border-radius: 15px;
-        padding: 15px 25px;
-        text-align: center;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        letter-spacing: 2px;
-        text-transform: uppercase;">
-            Welcome to the Userbase
-        </h1>
-
-
+        style="display: flex; flex-direction: column; justify-content: center;  align-items:center; height: 100vh;">
+       {% block contents %}
+       {% endblock %}
     </div>
     <div class="container-fluid">
         <div class="container">

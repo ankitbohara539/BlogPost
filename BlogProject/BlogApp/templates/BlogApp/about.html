@@ -1,0 +1,21 @@
+{% extends 'BlogApp/base.html' %}
+{% block contents %}
+{% load static %}
+<div class="row d-flex justify-content-center align-items-center">
+   
+    <div class="col-md-6 col-12 text-center text-md-start">
+        <p class="text-uppercase text-secondary fw-bold">About Us</p>
+        <h1 class="display-5 fw-bold">Helping bloggers <br> share <span style="color:blue;">exceptional stories</span></h1>
+        <p class="text-muted">
+            BlogPost is your platform to amplify your voice and share your story with the world. 
+            Join thousands of bloggers who connect, inspire, and create a lasting impact through their words.
+        </p>
+        <a href="{% url 'login' %}"><button class="btn btn-primary btn-lg">Get Started for Free</button></a>
+    </div>
+
+    <div class="col-md-6 col-12 text-end">
+        <img src="{% static 'BlogApp/images/blog.png' %}" class="img-fluid rounded" alt="About Us">
+    </div>
+</div>
+
+{% endblock %}

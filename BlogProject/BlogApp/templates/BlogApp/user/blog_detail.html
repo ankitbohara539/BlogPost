@@ -1,133 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'BlogApp/user/userbase.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You are into User Base</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+{% block contents %}
+
+
+        <h2>{{ blog.title }}</h2>
+        <p>{{ blog.content }}</p>
+        <small class="blog-meta">By {{ blog.author }} on {{ blog.created_at }}</small>
+
+        {% if user == blog.author %}
+        <div class="blog-actions">
+            <a href="{% url 'blog_edit' blog.pk %}" class="edit-btn">Edit</a>
+            <a href="{% url 'blog_delete' blog.pk %}" class="delete-btn">Delete</a>
+        </div>
+        {% endif %}
+
+        <br><a href="{% url 'blog_list' %}" class="back-btn">Back to Blogs</a>
+    </div>
+
     <style>
-        body {
-            font-family: "Poppins", serif;
-            font-weight: 600;
-            font-style: normal;
+        .blog-detail-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .blog-meta {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .blog-actions {
+            margin-top: 20px;
+        }
+
+        .edit-btn,
+        .delete-btn,
+        .back-btn {
+            padding: 10px 20px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .edit-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .delete-btn {
+            background-color: #E74C3C;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background-color: #C0392B;
+        }
+
+        .back-btn {
+            color: #333;
+        }
+
+        .back-btn:hover {
+            color: #007BFF;
         }
     </style>
-</head>
-
-<body>
-    <div class="container-fluid" style="display: flex; justify-content: center;">
-        <div class="container" style="z-index: 1; position:fixed;">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container-fluid">
-                    <!-- Brand -->
-                    <a class="navbar-brand" href="{% url 'userbase' %}">
-                        <h2 style="font-weight: 800;">
-                             <span style="color: blue;">Blog</span>Post
-                        </h2>
-                    </a>
-
-                    <!-- Hamburger Menu -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <!-- Navbar Links -->
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                        <ul class="navbar-nav b-2 mb-lg-0">
-
-                            <li class="nav-item me-4">
-                                <a class="nav-link" href="{% url 'blog_create' %}">NewBlogs</a>
-                            </li>
-                            <li class="nav-item me-4">
-                                <a class="nav-link" href="#">About</a>
-                            </li>
-                            <p class="mb-0 ms-3"><a href="../" class="btn btn-primary">Logout</a></p>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <div class="container"
-        style="display: flex; justify-content: center;  align-items:center;height: 100vh;z-index: -1;">
-        <div class="blog-detail-container">
-            <h2>{{ blog.title }}</h2>
-            <p>{{ blog.content }}</p>
-            <small class="blog-meta">By {{ blog.author }} on {{ blog.created_at }}</small>
-        
-            {% if user == blog.author %}
-                <div class="blog-actions">
-                    <a href="{% url 'blog_edit' blog.pk %}" class="edit-btn">Edit</a>
-                    <a href="{% url 'blog_delete' blog.pk %}" class="delete-btn">Delete</a>
-                </div>
-            {% endif %}
-            
-            <br><a href="{% url 'blog_list' %}" class="back-btn">Back to Blogs</a>
-        </div>
-        
-        <style>
-            .blog-detail-container {
-                max-width: 900px;
-                margin: 20px auto;
-                padding: 20px;
-                text-align: center;
-            }
-            .blog-meta {
-                display: block;
-                margin-top: 10px;
-                font-size: 14px;
-                color: #777;
-            }
-            .blog-actions {
-                margin-top: 20px;
-            }
-            .edit-btn, .delete-btn, .back-btn {
-                padding: 10px 20px;
-                margin: 10px;
-                text-decoration: none;
-                border-radius: 5px;
-                font-size: 18px;
-            }
-            .edit-btn {
-                background-color: #4CAF50;
-                color: white;
-            }
-            .edit-btn:hover {
-                background-color: #45a049;
-            }
-            .delete-btn {
-                background-color: #E74C3C;
-                color: white;
-            }
-            .delete-btn:hover {
-                background-color: #C0392B;
-            }
-            .back-btn {
-                color: #333;
-            }
-            .back-btn:hover {
-                color: #007BFF;
-            }
-        </style>
-    </div>
-    <div class="container-fluid" >
-        <div class="container">
-            <footer style="text-align: center;">
-                <p> &copy;2025 copyright BlogPost All Right Reserved</p>
-            </footer>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
+{% endblock %}
