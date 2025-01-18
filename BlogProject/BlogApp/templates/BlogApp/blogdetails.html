@@ -1,0 +1,10 @@
+{% extends 'BlogApp/base.html' %}
+{% block contents %}
+
+<div class="blog-detail-container">
+    <h2>{{ blog.title }}</h2>
+    <p style="text-align: justify;">{{ blog.content }}</p>
+    <small class="blog-meta">By {{ blog.author }} on {{ blog.created_at }}</small>
+</div>
+
+{% endblock %}

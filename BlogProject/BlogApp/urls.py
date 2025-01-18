@@ -1,8 +1,26 @@
 from .import views
 from django.urls import path
 
-urlpatterns =  [
-    path ("base/", views.basepage, name = "basepage"),
-    path ("", views.home, name = "home"),
+urlpatterns = [
+    path('', views.loginpage, name='login'),  # Login page
+    path('login/', views.loginpage, name='login'),  # Login page
+    path('logout/', views.logout_page, name='logout'),  # Logout page
+    path('home/', views.home, name='home'),  # Home page
+    path('userbase/', views.userbase, name='userbase'),  # Userbase page
+    path('blog/', views.blog_cards, name='blog_cards'),
+    path('register/', views.register, name ='register'),  # Registration page
+   
 
+
+
+
+
+    # blog urls
+
+    path('blog_list/', views.blog_list, name='blog_list'),
+    path('blog/<int:pk>/', views.blog_detail, name='blog_detail'),
+    path('blog/new/', views.blog_create, name='blog_create'),
+    path('blog/<int:pk>/edit/', views.blog_edit, name='blog_edit'),
+    path('blog/<int:pk>/delete/', views.blog_delete, name='blog_delete'),
+    path('blogs/<int:pk>/', views.blogdetail, name='blogdetail'),
 ]
